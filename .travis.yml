@@ -1,0 +1,32 @@
+---
+env:
+  - HADOLINT_VERSION=1.18.0
+sudo: false
+language: generic
+env:
+  # Path to 'hadolint' binary
+  HADOLINT: "${HOME}/hadolint"
+rvm:
+  - 2.6
+
+install:
+  # Install gems
+  - bundle install
+
+  # Download latest hadolint binary and set it as executable
+  - curl -L "https://github.com/hadolint/hadolint/releases/download/v${HADOLINT_VERSION}/hadolint-Linux-x86_64" -o hadolint
+    && chmod 0750 hadolint
+    && ./hadolint --ignore=DL3018 Dockerfile
+
+
+script:
+  # Validate README.md URLs
+  - awesome_bot --allow-timeout --request-delay 1 --skip-save-results --allow-dupe --white-list=localhost --files $(find . -name "*.md" | tr '\n' ',')
+
+  # DL3007 Using latest is prone to errors if the image will ever update. Pin the version explicitly to a release tag
+  # DL3008 Pin versions in apt get install. Instead of `apt-get install <package>` use `apt-get install <package>=<version>`
+  # DL3018 Pin versions in apk add. Instead of `apk add <package>` use `apk add <package>=<version>`
+  # SC2039 In POSIX sh, $'..' is undefined.
+
+  # Lint Dockerfile 
+  - git ls-files --exclude='Dockerfile*' --ignored | xargs --max-lines=1 ${HADOLINT} --ignore DL3007 --ignore DL3008 --ignore DL3018 --ignore SC2039

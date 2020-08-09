@@ -1,0 +1,33 @@
+# Source
+FROM alpine:3.6
+
+# Install openrc
+RUN apk --no-cache add openrc && \
+  # Install utilities needed to test Ansible
+  apk --no-cache add net-tools python sudo && \
+  # Disable ttys
+  sed -i 's/^tty/#tty/g' /etc/inittab && \
+  # Purge logs
+  rm -rf /var/log/*
+
+# Create unprivileged `ansible` user with sudo root permissions
+# and membership in `DEPLOY_GROUP` for use when testing Ansible as
+# as unprivileged user
+ENV ANSIBLE_USER=ansible SUDO_GROUP=wheel DEPLOY_GROUP=deployer
+RUN set -xe && \
+  addgroup -S ${DEPLOY_GROUP} && \
+  adduser -SD ${ANSIBLE_USER} && \
+  adduser ${ANSIBLE_USER} ${SUDO_GROUP} && \
+  adduser ${ANSIBLE_USER} ${DEPLOY_GROUP} && \
+  echo "%${SUDO_GROUP} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/ansible
+
+# Needed by OpenRC
+VOLUME [ "/run" ]
+
+# Start via init
+CMD ["/sbin/init"]
+
+# Image metadata
+LABEL org.label-schema.vendor="Mesaguy" \
+      org.label-schema.name="Alpine Linux 3.6 boot" \
+      org.label-schema.description="Image boots Alpine Linux 3.6 via OpenRC"
