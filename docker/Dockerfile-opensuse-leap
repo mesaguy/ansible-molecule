@@ -5,8 +5,10 @@ FROM opensuse/leap:latest
 RUN zypper --non-interactive dup && \
   # Install OS identifiers
   zypper --non-interactive install --no-confirm openSUSE-release && \
+  # Install systemd && \
+  zypper --non-interactive install systemd && \
   # Install utilities needed to test Ansible
-  zypper --non-interactive install net-tools python sudo && \
+  zypper --non-interactive install net-tools python sudo system-group-wheel && \
   # Strip down systemd
   rm -f /usr/lib/systemd/system/multi-user.target.wants/* && \
   rm -f /etc/systemd/system/*.wants/* && \
