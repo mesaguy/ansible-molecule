@@ -14,8 +14,8 @@ install:
   - bundle install
 
   # Download latest hadolint binary and set it as executable
-  - curl -L "https://github.com/hadolint/hadolint/releases/download/v${HADOLINT_VERSION}/hadolint-Linux-x86_64" -o hadolint
-    && chmod 0750 hadolint
+  - curl -L "https://github.com/hadolint/hadolint/releases/download/v${HADOLINT_VERSION}/hadolint-Linux-x86_64" -o ${HADOLINT}
+    && chmod 0750 ${HADOLINT}
 
 script:
   # Validate README.md URLs
