@@ -1,8 +1,6 @@
 ---
 env:
-  - HADOLINT_VERSION=1.18.0
-  # Path to 'hadolint' binary
-  - HADOLINT: "${HOME}/hadolint"
+  - HADOLINT_VERSION=1.18.0 HADOLINT="${HOME}/hadolint"
 sudo: false
 language: generic
 rvm:
