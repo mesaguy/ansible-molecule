@@ -5,7 +5,7 @@ FROM opensuse/archive:42.3
 RUN zypper --non-interactive dup && \
   # Install OS identifiers
   zypper --non-interactive install openSUSE-release && \
-  # Install systemd libraries && \
+  # Install systemd && \
   zypper --non-interactive install dbus-1 systemd-sysvinit && \
   # Install utilities needed to test Ansible
   zypper --non-interactive install net-tools python sudo && \
