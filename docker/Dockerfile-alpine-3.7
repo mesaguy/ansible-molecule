@@ -4,7 +4,7 @@ FROM alpine:3.7
 # Install openrc
 RUN apk --no-cache add openrc && \
   # Install utilities needed to test Ansible
-  apk --no-cache add net-tools python sudo && \
+  apk --no-cache add curl gzip net-tools procps python sudo zip && \
   # Disable ttys
   sed -i 's/^tty/#tty/g' /etc/inittab && \
   # Purge logs
