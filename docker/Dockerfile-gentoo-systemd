@@ -45,7 +45,7 @@ RUN set -xe && \
 VOLUME [ "/sys/fs/cgroup", "/run" ]
 
 # Start via systemd
-CMD ["/usr/lib64/systemd/systemd"]
+CMD ["/lib/systemd/systemd"]
 
 # Image metadata
 LABEL org.label-schema.vendor="Mesaguy" \
