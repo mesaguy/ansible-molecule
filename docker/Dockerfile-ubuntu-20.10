@@ -4,7 +4,7 @@ FROM ubuntu:20.10
 # Update repo definitions
 RUN apt-get update && \
   # Install utilities needed to test Ansible
-  apt-get install --no-install-recommends -y net-tools python3 python3-apt sudo zip && \
+  apt-get install --no-install-recommends -y curl net-tools openssl python3 python3-apt sudo unzip zip && \
   # Install systemd
   apt-get install --no-install-recommends -y systemd && \
   # Don't start any optional services except for the few we need.
