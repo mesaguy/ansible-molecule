@@ -8,7 +8,7 @@ RUN zypper --non-interactive dup && \
   # Install systemd && \
   zypper --non-interactive install systemd && \
   # Install utilities needed to test Ansible
-  zypper --non-interactive install net-tools python shadow sudo system-group-wheel && \
+  zypper --non-interactive install net-tools python python-xml shadow sudo system-group-wheel && \
   # Clean (purge) the repo cache
   zypper --non-interactive clean --all && \
   # Purge logs

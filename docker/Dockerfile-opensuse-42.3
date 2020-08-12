@@ -8,7 +8,7 @@ RUN zypper --non-interactive dup && \
   # Install systemd && \
   zypper --non-interactive install dbus-1 systemd-sysvinit && \
   # Install utilities needed to test Ansible
-  zypper --non-interactive install net-tools python sudo && \
+  zypper --non-interactive install net-tools python python-xml sudo && \
   # Strip down systemd
   find /usr/lib/systemd/system/sysinit.target.wants -type l ! -name systemd-tmpfiles-setup.service -delete && \
   rm -f /usr/lib/systemd/system/multi-user.target.wants/* && \
