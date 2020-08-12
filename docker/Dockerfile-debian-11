@@ -1,6 +1,9 @@
 # Source
 FROM debian:bullseye
 
+# All apt-get actions aren't interactive
+ARG DEBIAN_FRONTEND=noninteractive
+
 # Update repo definitions
 RUN apt-get update && \
   # Upgrade all packages
@@ -8,7 +11,7 @@ RUN apt-get update && \
   # Install systemd
   apt-get install --no-install-recommends -y systemd && \
   # Install utilities needed to test Ansible
-  apt-get install --no-install-recommends -y net-tools python sudo zip && \
+  apt-get install --no-install-recommends -y net-tools python3 python3-apt sudo zip && \
   # Don't start any optional services except for the few we need.
   find /etc/systemd/system \
   /lib/systemd/system \
