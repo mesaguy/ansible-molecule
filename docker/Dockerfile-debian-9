@@ -6,7 +6,7 @@ RUN apt-get update && \
   # Upgrade all packages
   apt-get dist-upgrade -y && \
   # Install systemd
-  apt-get install --no-install-recommends -y systemd && \
+  apt-get install --no-install-recommends -y dbus systemd && \
   # Install utilities needed to test Ansible
   apt-get install --no-install-recommends -y curl net-tools openssl python sudo unzip zip && \
   # Don't start any optional services except for the few we need.
