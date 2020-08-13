@@ -2,18 +2,18 @@
 FROM fedora:22
 
 # Clean (purge) the repo cache
-RUN yum -d1 -y clean all && \
+RUN dnf -y clean all && \
   # Fix for https://bugzilla.redhat.com/show_bug.cgi?id=1223602
   touch /var/lib/rpm/* && \
-  # Install docker OverlayFS plugin for yum:
-  yum -d1 -y install yum-plugin-ovl || true && \
-  yum -d1 -y update yum && \
+  # Install docker OverlayFS plugin for dnf:
+  dnf -y install dnf-plugin-ovl || true && \
+  dnf -y update dnf && \
   # Install systemctl
-  yum -d1 -y install systemd systemd-libs dbus && \
+  dnf -y install systemd systemd-libs dbus && \
   # Install utilities needed to test Ansible
-  yum -d1 -y install net-tools sudo && \
+  dnf -y install net-tools sudo && \
   # Clean (purge) the repo cache
-  yum -d1 -y clean all && rm -rf /var/cache/yum/* && \
+  dnf -y clean all && rm -rf /var/cache/dnf/* /var/cache/yum/* && \
   # Purge logs
   rm -rf /var/log/* /var/run/log/journal && \
   # Strip down systemd

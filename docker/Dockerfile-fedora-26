@@ -2,11 +2,11 @@
 FROM fedora:26
 
 # Clean (purge) the repo cache
-RUN yum -d1 -y clean all && \
+RUN dnf -y clean all && \
   # Install utilities needed to test Ansible
-  yum -d1 -y install net-tools sudo && \
+  dnf -y install net-tools sudo && \
   # Clean (purge) the repo cache
-  yum -d1 -y clean all && rm -rf /var/cache/yum/* && \
+  dnf -y clean all && rm -rf /var/cache/dnf/* /var/cache/yum/* && \
   # Purge logs
   rm -rf /var/log/* /var/run/log/journal && \
   # Strip down systemd
