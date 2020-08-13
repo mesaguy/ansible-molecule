@@ -5,6 +5,8 @@ FROM oraclelinux:8.1
 RUN dnf -y clean all && \
   # Replace broken systemd, ships with missing libsystemd-shared-239.so
   dnf -y reinstall systemd && \
+  # Install dbus daemon for systemd
+  dnf -y install dbus-daemon && \
   # Install utilities needed to test Ansible
   yum -d1 -y install net-tools sudo && \
   # Strip down systemd
