@@ -1,0 +1,116 @@
+---
+driver:
+  name: docker
+platforms:
+  - name: fedora-20
+    image: mesaguy/ansible-molecule-fedora:fedora-20
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: fedora-21
+    image: mesaguy/ansible-molecule-fedora:fedora-21
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: fedora-22
+    image: mesaguy/ansible-molecule-fedora:fedora-22
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: fedora-23
+    image: mesaguy/ansible-molecule-fedora:fedora-23
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: fedora-24
+    image: mesaguy/ansible-molecule-fedora:fedora-24
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: fedora-25
+    image: mesaguy/ansible-molecule-fedora:fedora-25
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: fedora-26
+    image: mesaguy/ansible-molecule-fedora:fedora-26
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: fedora-27
+    image: mesaguy/ansible-molecule-fedora:fedora-27
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: fedora-28
+    image: mesaguy/ansible-molecule-fedora:fedora-28
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: fedora-29
+    image: mesaguy/ansible-molecule-fedora:fedora-29
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: fedora-30
+    image: mesaguy/ansible-molecule-fedora:fedora-30
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: fedora-31
+    image: mesaguy/ansible-molecule-fedora:fedora-31
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: fedora-32
+    image: mesaguy/ansible-molecule-fedora:fedora-32
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: fedora-rawhide
+    image: mesaguy/ansible-molecule-fedora:latest
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"

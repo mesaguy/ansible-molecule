@@ -1,0 +1,52 @@
+---
+driver:
+  name: docker
+platforms:
+  - name: oraclelinux-6.6
+    image: mesaguy/ansible-molecule-oraclelinux6:oraclelinux-6.6
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: oraclelinux-6.7
+    image: mesaguy/ansible-molecule-oraclelinux6:oraclelinux-6.7
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: oraclelinux-6.8
+    image: mesaguy/ansible-molecule-oraclelinux6:oraclelinux-6.8
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: oraclelinux-6.9
+    image: mesaguy/ansible-molecule-oraclelinux6:oraclelinux-6.9
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: oraclelinux-6.10
+    image: mesaguy/ansible-molecule-oraclelinux6:oraclelinux-6.10
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: oraclelinux-6-latest
+    image: mesaguy/ansible-molecule-oraclelinux6:latest
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"

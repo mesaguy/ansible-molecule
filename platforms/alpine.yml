@@ -1,0 +1,92 @@
+---
+driver:
+  name: docker
+platforms:
+  - name: alpine-3.3
+    image: mesaguy/ansible-molecule-alpine:alpine-3.3
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: alpine-3.4
+    image: mesaguy/ansible-molecule-alpine:alpine-3.4
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: alpine-3.5
+    image: mesaguy/ansible-molecule-alpine:alpine-3.5
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: alpine-3.6
+    image: mesaguy/ansible-molecule-alpine:alpine-3.6
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: alpine-3.7
+    image: mesaguy/ansible-molecule-alpine:alpine-3.7
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: alpine-3.8
+    image: mesaguy/ansible-molecule-alpine:alpine-3.8
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: alpine-3.9
+    image: mesaguy/ansible-molecule-alpine:alpine-3.9
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: alpine-3.10
+    image: mesaguy/ansible-molecule-alpine:alpine-3.10
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: alpine-3.11
+    image: mesaguy/ansible-molecule-alpine:alpine-3.11
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: alpine-3.12
+    image: mesaguy/ansible-molecule-alpine:alpine-3.12
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: alpine-edge
+    image: mesaguy/ansible-molecule-alpine:alpine-edge
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"

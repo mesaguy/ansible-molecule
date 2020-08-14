@@ -1,0 +1,36 @@
+---
+driver:
+  name: docker
+platforms:
+  - name: oraclelinux-8.0
+    image: mesaguy/ansible-molecule-oraclelinux8:oraclelinux-8.0
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: oraclelinux-8.1
+    image: mesaguy/ansible-molecule-oraclelinux8:oraclelinux-8.1
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: oraclelinux-8.2
+    image: mesaguy/ansible-molecule-oraclelinux8:oraclelinux-8.2
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: oraclelinux-8-latest
+    image: mesaguy/ansible-molecule-oraclelinux8:latest
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"

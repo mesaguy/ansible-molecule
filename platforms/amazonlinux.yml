@@ -1,0 +1,20 @@
+---
+driver:
+  name: docker
+platforms:
+  - name: amazonlinux-1
+    image: mesaguy/ansible-molecule-amazonlinux:amazonlinux-1
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: amazonlinux-2
+    image: mesaguy/ansible-molecule-amazonlinux:amazonlinux-2
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"

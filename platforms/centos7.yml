@@ -1,0 +1,84 @@
+---
+driver:
+  name: docker
+platforms:
+  - name: centos-7.0
+    image: mesaguy/ansible-molecule-centos7:centos-7.0
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: centos-7.1
+    image: mesaguy/ansible-molecule-centos7:centos-7.1
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: centos-7.2
+    image: mesaguy/ansible-molecule-centos7:centos-7.2
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: centos-7.3
+    image: mesaguy/ansible-molecule-centos7:centos-7.3
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: centos-7.4
+    image: mesaguy/ansible-molecule-centos7:centos-7.4
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: centos-7.5
+    image: mesaguy/ansible-molecule-centos7:centos-7.5
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: centos-7.6
+    image: mesaguy/ansible-molecule-centos7:centos-7.6
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: centos-7.7
+    image: mesaguy/ansible-molecule-centos7:centos-7.7
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: centos-7.8
+    image: mesaguy/ansible-molecule-centos7:centos-7.8
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: centos-7-latest
+    image: mesaguy/ansible-molecule-centos7:latest
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"

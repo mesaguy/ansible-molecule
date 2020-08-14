@@ -1,0 +1,12 @@
+---
+driver:
+  name: docker
+platforms:
+  - name: archlinux
+    image: mesaguy/ansible-molecule-archlinux:latest
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"

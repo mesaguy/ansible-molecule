@@ -1,0 +1,20 @@
+---
+driver:
+  name: docker
+platforms:
+  - name: gentoo-openrc
+    image: mesaguy/ansible-molecule-gentoo:gentoo-openrc
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: gentoo-systemd
+    image: mesaguy/ansible-molecule-gentoo:gentoo-systemd
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"

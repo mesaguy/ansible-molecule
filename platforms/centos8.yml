@@ -1,0 +1,36 @@
+---
+driver:
+  name: docker
+platforms:
+  - name: centos-8.0
+    image: mesaguy/ansible-molecule-centos8:centos-8.0
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: centos-8.1
+    image: mesaguy/ansible-molecule-centos8:centos-8.1
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: centos-8.2
+    image: mesaguy/ansible-molecule-centos8:centos-8.2
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: centos-8-latest
+    image: mesaguy/ansible-molecule-centos8:latest
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"

@@ -1,0 +1,44 @@
+---
+driver:
+  name: docker
+platforms:
+  - name: ubuntu-16.04
+    image: mesaguy/ansible-molecule-ubuntu:ubuntu-16.04
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: ubuntu-18.04
+    image: mesaguy/ansible-molecule-ubuntu:ubuntu-18.04
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: ubuntu-19.10
+    image: mesaguy/ansible-molecule-ubuntu:ubuntu-19.10
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: ubuntu-20.04
+    image: mesaguy/ansible-molecule-ubuntu:ubuntu-20.04
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - name: ubuntu-20.10
+    image: mesaguy/ansible-molecule-ubuntu:ubuntu-20.10
+    override_command: false
+    privileged: true
+    pre_build_image: true
+    pull: true
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
