@@ -10,7 +10,7 @@ RUN yum -d1 -y clean all && rm -rf /var/cache/yum/* && \
   # Install systemctl
   yum -d1 -y install systemd systemd-libs dbus fsck.ext4 && \
   # Install utilities needed to test Ansible
-  yum -d1 -y install net-tools sudo && \
+  yum -d1 -y install net-tools procps-ng sudo && \
   # Strip down systemd
   find /lib/systemd/system/sysinit.target.wants -type l ! -name systemd-tmpfiles-setup.service -delete && \
   rm -f /lib/systemd/system/multi-user.target.wants/* && \
