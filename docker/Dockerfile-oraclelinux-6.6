@@ -10,7 +10,7 @@ RUN yum -d1 -y clean all && rm -rf /var/cache/yum/* && \
   # Update select packages to allow git to reach https sites
   yum -d1 -y update nss curl libcurl && \
   # Install utilities needed to test Ansible
-  yum -d1 -y install net-tools sudo && \
+  yum -d1 -y install net-tools sudo which unzip && \
   # Disable all services
   rm /etc/rc.d/rc*.d/* && \
   # Disable ttys

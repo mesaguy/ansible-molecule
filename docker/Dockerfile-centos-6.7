@@ -8,7 +8,7 @@ RUN yum -d1 -y clean all && \
   # Install init scripts
   yum -d1 -y install initscripts && \
   # Install utilities needed to test Ansible
-  yum -d1 -y install net-tools sudo && \
+  yum -d1 -y install net-tools sudo which unzip && \
   # Disable all services
   rm /etc/rc.d/rc*.d/* && \
   # Disable ttys

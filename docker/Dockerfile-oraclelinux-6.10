@@ -6,7 +6,7 @@ RUN yum -d1 -y clean all && \
   # Install docker OverlayFS plugin for yum:
   yum -d1 -y install yum-plugin-ovl && \
   # Install utilities needed to test Ansible
-  yum -d1 -y install net-tools sudo && \
+  yum -d1 -y install net-tools sudo which unzip && \
   # Install init scripts
   yum -d1 -y install initscripts && \
   # Disable all services

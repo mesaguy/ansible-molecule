@@ -6,7 +6,7 @@ RUN yum -d1 -y clean all && \
   # Update all packages
   yum -d1 -y update && \
   # Install utilities needed to test Ansible
-  yum -d1 -y install net-tools sudo && \
+  yum -d1 -y install net-tools sudo which unzip && \
   # Disable all services
   rm /etc/rc.d/rc*.d/* && \
   # Clean (purge) the repo cache

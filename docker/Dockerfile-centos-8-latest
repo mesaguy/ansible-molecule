@@ -6,7 +6,7 @@ RUN dnf -y clean all && \
   # Replace broken systemd, ships with missing libsystemd-shared-239.so
   dnf -y install systemd && \
   # Install utilities needed to test Ansible
-  yum -d1 -y install net-tools procps-ng python3 sudo && \
+  yum -d1 -y install net-tools procps-ng python3 sudo which unzip && \
   # Update all packages
   yum -d1 -y update && \
   # Strip down systemd

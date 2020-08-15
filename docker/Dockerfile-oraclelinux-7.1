@@ -12,7 +12,7 @@ RUN yum -d1 -y clean all && rm -rf /var/cache/yum/* && \
   # Update select packages to allow git to reach https sites
   yum -d1 -y update nss curl libcurl && \
   # Install utilities needed to test Ansible
-  yum -d1 -y install net-tools procps-ng sudo && \
+  yum -d1 -y install net-tools procps-ng sudo which unzip && \
   # Strip down systemd
   find /lib/systemd/system/sysinit.target.wants -type l ! -name systemd-tmpfiles-setup.service -delete && \
   rm -f /lib/systemd/system/multi-user.target.wants/* && \
