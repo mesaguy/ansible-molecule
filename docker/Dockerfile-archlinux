@@ -6,7 +6,7 @@ RUN pacman -Syu --noconfirm && \
   # Install systemctl
   pacman --noconfirm -S systemd && \
   # Install utilities needed to test Ansible
-  pacman --noconfirm -S net-tools procps-ng python3 sudo && \
+  pacman --noconfirm -S net-tools procps-ng python3 sudo tar unzip which && \
   # Strip down systemd
   find /lib/systemd/system/sysinit.target.wants -type l ! -name systemd-tmpfiles-setup.service -delete && \
   rm -f /lib/systemd/system/multi-user.target.wants/* && \
