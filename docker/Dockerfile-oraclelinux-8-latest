@@ -8,7 +8,7 @@ RUN dnf -y clean all && \
   # Replace broken systemd, ships with missing libsystemd-shared-239.so
   dnf -y reinstall systemd && \
   # Install utilities needed to test Ansible
-  yum -d1 -y install net-tools procps-ng sudo which unzip && \
+  dnf -d1 -y install net-tools procps-ng sudo which unzip && \
   # Strip down systemd
   for f in /lib/systemd/system/sysinit.target.wants/* ; do if [ "$(basename "$f")" != "systemd-tmpfiles-setup.service" ] ; then rm -f "$f" ; fi ; done && \
   rm -f /lib/systemd/system/multi-user.target.wants/* && \
