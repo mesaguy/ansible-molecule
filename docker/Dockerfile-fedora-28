@@ -4,7 +4,7 @@ FROM fedora:28
 # Clean (purge) the repo cache
 RUN dnf -y clean all && \
   # Install utilities needed to test Ansible
-  dnf -y install net-tools procps-ng sudo tar unzip && \
+  dnf -y install net-tools procps-ng sudo tar unzip which && \
   # Strip down systemd
   for f in /lib/systemd/system/sysinit.target.wants/* ; do if [ "$(basename "$f")" != "systemd-tmpfiles-setup.service" ] ; then rm -f "$f" ; fi ; done && \
   rm -f /lib/systemd/system/multi-user.target.wants/* && \

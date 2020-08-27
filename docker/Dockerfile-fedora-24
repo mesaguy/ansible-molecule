@@ -4,7 +4,7 @@ FROM fedora:24
 # Clean (purge) the repo cache
 RUN dnf -y clean all && \
   # Install utilities needed to test Ansible
-  dnf -y install net-tools procps-ng sudo tar unzip && \
+  dnf -y install net-tools procps-ng sudo tar unzip which && \
   # Clean (purge) the repo cache
   dnf -y clean all && rm -rf /var/cache/dnf/* /var/cache/yum/* && \
   # Purge logs

@@ -11,7 +11,7 @@ RUN dnf -y clean all && \
   # Install systemctl
   dnf -y install systemd systemd-libs dbus && \
   # Install utilities needed to test Ansible
-  dnf -y install net-tools procps-ng sudo tar unzip yum && \
+  dnf -y install net-tools procps-ng sudo tar unzip which yum && \
   # Clean (purge) the repo cache
   dnf -y clean all && rm -rf /var/cache/dnf/* /var/cache/yum/* && \
   # Purge logs
