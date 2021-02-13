@@ -1,12 +1,16 @@
 # Source
-FROM archlinux:latest
+FROM centos:7.9.2009
 
-# Update repo definitions
-RUN pacman -Syu --noconfirm && \
+# Clean (purge) the repo cache
+RUN yum -d1 -y clean all && \
+  # Install docker OverlayFS plugin for yum:
+  yum -d1 -y update yum && yum -d1 -y clean all && \
+  # Remove troublesome packages
+  yum -d1 -y remove fakesystemd systemd-container systemd-container-libs  && \
   # Install systemctl
-  pacman --noconfirm -S systemd && \
+  yum -d1 -y install systemd systemd-libs dbus fsck.ext4 yum-plugin-ovl && \
   # Install utilities needed to test Ansible
-  pacman --noconfirm -S net-tools procps-ng python3 sudo tar unzip which && \
+  yum -d1 -y install net-tools sudo && \
   # Strip down systemd
   find /lib/systemd/system/sysinit.target.wants -type l ! -name systemd-tmpfiles-setup.service -delete && \
   rm -f /lib/systemd/system/multi-user.target.wants/* && \
@@ -17,7 +21,7 @@ RUN pacman -Syu --noconfirm && \
   rm -f /lib/systemd/system/basic.target.wants/* && \
   rm -f /lib/systemd/system/anaconda.target.wants/* && \
   # Clean (purge) the repo cache
-  pacman --noconfirm -Scc && rm -rf /var/lib/pacman/sync/* && \
+  yum -d1 -y clean all && rm -rf /var/cache/yum/* && \
   # Purge logs
   rm -rf /var/log/* /var/run/log/journal
 
@@ -45,5 +49,5 @@ CMD ["/usr/lib/systemd/systemd"]
 
 # Image metadata
 LABEL org.label-schema.vendor="Mesaguy" \
-      org.label-schema.name="ArchLinux latest rolling-release boot" \
-      org.label-schema.description="Image boots ArchLinux's latest rolling-release via systemd"
+      org.label-schema.name="CentOS Linux 7.9.2009 boot" \
+      org.label-schema.description="Image boots CentOS Linux 7.9.2009 via systemd"

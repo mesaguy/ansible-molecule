@@ -1,31 +1,28 @@
 # Source
-FROM ubuntu:19.10
+FROM fedora:33
 
-# Update repo definitions
-RUN apt-get update && \
+# Clean (purge) the repo cache
+RUN dnf -y clean all && \
   # Install utilities needed to test Ansible
-  apt-get install --no-install-recommends -y curl net-tools openssl python python-apt sudo unzip zip && \
-  # Install systemd
-  apt-get install --no-install-recommends -y systemd && \
-  # Don't start any optional services except for the few we need.
-  find /etc/systemd/system \
-  /lib/systemd/system \
-  -path '*.wants/*' \
-  -not -name '*journald*' \
-  -not -name '*systemd-tmpfiles*' \
-  -not -name '*systemd-user-sessions*' \
-  -exec rm \{\} \; && \
-  systemctl set-default multi-user.target && \
+  dnf -y install net-tools sudo && \
+  # Strip down systemd
+  for f in /lib/systemd/system/sysinit.target.wants/* ; do if [ "$(basename "$f")" != "systemd-tmpfiles-setup.service" ] ; then rm -f "$f" ; fi ; done && \
+  rm -f /lib/systemd/system/multi-user.target.wants/* && \
+  rm -f /etc/systemd/system/*.wants/* && \
+  rm -f /lib/systemd/system/local-fs.target.wants/* && \
+  rm -f /lib/systemd/system/sockets.target.wants/*udev* && \
+  rm -f /lib/systemd/system/sockets.target.wants/*initctl* && \
+  rm -f /lib/systemd/system/basic.target.wants/* && \
+  rm -f /lib/systemd/system/anaconda.target.wants/* && \
   # Clean (purge) the repo cache
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/* && \
+  dnf -y clean all && rm -rf /var/cache/dnf/* /var/cache/yum/* && \
   # Purge logs
   rm -rf /var/log/* /var/run/log/journal
 
 # Create unprivileged `ansible` user with sudo root permissions
 # and membership in `DEPLOY_GROUP` for use when testing Ansible as
 # as unprivileged user
-ENV ANSIBLE_USER=ansible SUDO_GROUP=adm DEPLOY_GROUP=deployer
+ENV ANSIBLE_USER=ansible SUDO_GROUP=wheel DEPLOY_GROUP=deployer
 RUN set -xe && \
   groupadd -r ${ANSIBLE_USER} && \
   groupadd -r ${DEPLOY_GROUP} && \
@@ -42,9 +39,9 @@ RUN set -xe && \
 VOLUME [ "/sys/fs/cgroup", "/run" ]
 
 # Start via systemd
-CMD ["/lib/systemd/systemd"]
+CMD ["/usr/lib/systemd/systemd"]
 
 # Image metadata
 LABEL org.label-schema.vendor="Mesaguy" \
-      org.label-schema.name="Ubuntu Linux 19.10 (Eoan Ermine) boot" \
-      org.label-schema.description="Image boots Ubuntu Linux 19.10 (Eoan Ermine) via systemd"
+      org.label-schema.name="Fedora Linux 32 boo3" \
+      org.label-schema.description="Image boots Fedora Linux 33 via systemd"

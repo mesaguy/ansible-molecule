@@ -1,14 +1,14 @@
 # Source
-FROM archlinux:latest
+FROM centos:8.3.2011
 
-# Update repo definitions
-RUN pacman -Syu --noconfirm && \
-  # Install systemctl
-  pacman --noconfirm -S systemd && \
+# Clean (purge) the repo cache
+RUN dnf -y clean all && \
+  # Replace broken systemd, ships with missing libsystemd-shared-239.so
+  dnf -y install systemd && \
   # Install utilities needed to test Ansible
-  pacman --noconfirm -S net-tools procps-ng python3 sudo tar unzip which && \
+  yum -d1 -y install net-tools python3 sudo && \
   # Strip down systemd
-  find /lib/systemd/system/sysinit.target.wants -type l ! -name systemd-tmpfiles-setup.service -delete && \
+  for f in /lib/systemd/system/sysinit.target.wants/* ; do if [ "$(basename "$f")" != "systemd-tmpfiles-setup.service" ] ; then rm -f "$f" ; fi ; done && \
   rm -f /lib/systemd/system/multi-user.target.wants/* && \
   rm -f /etc/systemd/system/*.wants/* && \
   rm -f /lib/systemd/system/local-fs.target.wants/* && \
@@ -17,7 +17,7 @@ RUN pacman -Syu --noconfirm && \
   rm -f /lib/systemd/system/basic.target.wants/* && \
   rm -f /lib/systemd/system/anaconda.target.wants/* && \
   # Clean (purge) the repo cache
-  pacman --noconfirm -Scc && rm -rf /var/lib/pacman/sync/* && \
+  dnf -y clean all && rm -rf /var/cache/dnf/* /var/cache/yum/* && \
   # Purge logs
   rm -rf /var/log/* /var/run/log/journal
 
@@ -45,5 +45,5 @@ CMD ["/usr/lib/systemd/systemd"]
 
 # Image metadata
 LABEL org.label-schema.vendor="Mesaguy" \
-      org.label-schema.name="ArchLinux latest rolling-release boot" \
-      org.label-schema.description="Image boots ArchLinux's latest rolling-release via systemd"
+      org.label-schema.name="CentOS Linux 8.3.2011 boot" \
+      org.label-schema.description="Image boots CentOS Linux 8.3.2011 via systemd"
