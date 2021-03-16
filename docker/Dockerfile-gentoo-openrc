@@ -1,47 +1,47 @@
-# Source
-FROM gentoo/stage3-amd64:latest
+FROM gentoo/portage:latest as portage
 
-# Sync portage
-RUN mkdir -p /usr/portage/distfiles /usr/portage/metadata /usr/portage/packages && \
-  chown -R portage:portage /usr/portage && \
-  emerge-webrsync && \
+FROM gentoo/stage3:latest
+
+# copy the entire portage volume in
+COPY --from=portage /var/db/repos/gentoo /var/db/repos/gentoo
+
   # Add required base packages
-  emerge app-portage/gentoolkit && \
-  # Install utilities needed to test Ansible
-  emerge app-admin/sudo && \
-  # Tell openrc loopback and net are already there, since docker handles the networking
-  echo 'rc_provide="loopback net"' >> /etc/rc.conf && \
-  # Can't get ttys unless you run the container in privileged mode
-  sed -i '/tty/d' /etc/inittab && \
-  # Can't set hostname since docker sets it
-  sed -i "s/hostname \$opts/# hostname \$opts/g" /etc/init.d/hostname && \
-  # Can't mount tmpfs since not privileged
-  sed -i 's/mount -t tmpfs/# mount -t tmpfs/g' /lib/rc/sh/init.sh && \
-  # Can't do cgroups
-  sed -i 's/cgroup_add_service /# cgroup_add_service /g' /lib/rc/sh/openrc-run.sh && \
-  # Disable services
-  rc-update delete loopback boot && \
-  rc-update delete netmount default && \
-  # Remove troublesome and worthless start scripts
-  rm -rf /etc/init.d/bootmisc /etc/init.d/udev-settle /etc/init.d/udev /etc/init.d/udev-trigger /run/openrc && \
-  mkdir -p /run/openrc && \
-  echo "default" > /run/openrc/softlevel && \
-  # Cleanup portage, downloaded source files and compile directories
-  rm -rf /usr/portage /var/tmp/* && \
-  # Purge logs
-  rm -rf /var/log/*
+RUN emerge app-portage/gentoolkit && \
+    # Install utilities needed to test Ansible
+    emerge app-admin/sudo && \
+    # Tell openrc loopback and net are already there, since docker handles the networking
+    echo 'rc_provide="loopback net"' >> /etc/rc.conf && \
+    # Can't get ttys unless you run the container in privileged mode
+    sed -i '/tty/d' /etc/inittab && \
+    # Can't set hostname since docker sets it
+    sed -i "s/hostname \$opts/# hostname \$opts/g" /etc/init.d/hostname && \
+    # Can't mount tmpfs since not privileged
+    sed -i 's/mount -t tmpfs/# mount -t tmpfs/g' /lib/rc/sh/init.sh && \
+    # Can't do cgroups
+    sed -i 's/cgroup_add_service /# cgroup_add_service /g' /lib/rc/sh/openrc-run.sh && \
+    # Disable services
+    rc-update delete loopback boot && \
+    rc-update delete netmount default && \
+    # Remove troublesome and worthless start scripts
+    rm -rf /etc/init.d/bootmisc /etc/init.d/udev-settle /etc/init.d/udev /etc/init.d/udev-trigger /run/openrc && \
+    mkdir -p /run/openrc && \
+    echo "default" > /run/openrc/softlevel && \
+    # Cleanup portage, downloaded source files and compile directories
+    rm -rf /var/cache/distfiles /var/tmp/* && \
+    # Purge logs
+    rm -rf /var/log/*
 
 # Create unprivileged `ansible` user with sudo root permissions
 # and membership in `DEPLOY_GROUP` for use when testing Ansible as
 # as unprivileged user
 ENV ANSIBLE_USER=ansible SUDO_GROUP=wheel DEPLOY_GROUP=deployer
 RUN set -xe && \
-  groupadd -r ${ANSIBLE_USER} && \
-  groupadd -r ${DEPLOY_GROUP} && \
-  useradd -m -g ${ANSIBLE_USER} ${ANSIBLE_USER} && \
-  usermod -aG ${SUDO_GROUP} ${ANSIBLE_USER} && \
-  usermod -aG ${DEPLOY_GROUP} ${ANSIBLE_USER} && \
-  echo "%${SUDO_GROUP} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/ansible
+    groupadd -r ${ANSIBLE_USER} && \
+    groupadd -r ${DEPLOY_GROUP} && \
+    useradd -m -g ${ANSIBLE_USER} ${ANSIBLE_USER} && \
+    usermod -aG ${SUDO_GROUP} ${ANSIBLE_USER} && \
+    usermod -aG ${DEPLOY_GROUP} ${ANSIBLE_USER} && \
+    echo "%${SUDO_GROUP} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/ansible
 
 # Start via init
 CMD ["/sbin/init"]
