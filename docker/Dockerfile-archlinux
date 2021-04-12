@@ -1,5 +1,5 @@
 # Source
-FROM archlinux/archlinux:latest
+FROM archlinux/archlinux:base-devel
 
 # Update repo definitions
 RUN pacman -Syu --noconfirm && \
