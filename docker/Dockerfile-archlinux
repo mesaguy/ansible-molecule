@@ -1,12 +1,17 @@
 # Source
-FROM archlinux/archlinux:base-devel
+FROM archlinux/archlinux:base
+
+# Temporary fix until the following is resolved:
+# https://gitlab.archlinux.org/archlinux/archlinux-docker/-/issues/56
+RUN patched_glibc=glibc-linux4-2.33-4-x86_64.pkg.tar.zst && \
+    curl -LO "https://repo.archlinuxcn.org/x86_64/$patched_glibc" && \
+    bsdtar -C / -xvf "$patched_glibc" && \
+    echo "IgnorePkg   = glibc" >> /etc/pacman.conf
 
 # Update repo definitions
 RUN pacman -Syu --noconfirm && \
-  # Install systemctl
-  pacman --noconfirm -S systemd && \
   # Install utilities needed to test Ansible
-  pacman --noconfirm -S net-tools procps-ng python3 sudo tar unzip which && \
+  pacman --noconfirm -S net-tools python3 sudo unzip which && \
   # Strip down systemd
   find /lib/systemd/system/sysinit.target.wants -type l ! -name systemd-tmpfiles-setup.service -delete && \
   rm -f /lib/systemd/system/multi-user.target.wants/* && \
