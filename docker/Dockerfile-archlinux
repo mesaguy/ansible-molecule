@@ -1,13 +1,6 @@
 # Source
 FROM archlinux/archlinux:base
 
-# Temporary fix until the following is resolved:
-# https://gitlab.archlinux.org/archlinux/archlinux-docker/-/issues/56
-RUN patched_glibc=glibc-linux4-2.33-4-x86_64.pkg.tar.zst && \
-    curl -LO "https://repo.archlinuxcn.org/x86_64/$patched_glibc" && \
-    bsdtar -C / -xvf "$patched_glibc" && \
-    echo "IgnorePkg   = glibc" >> /etc/pacman.conf
-
 # Update repo definitions
 RUN pacman -Syu --noconfirm && \
   # Install utilities needed to test Ansible
